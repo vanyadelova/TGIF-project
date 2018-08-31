@@ -46,6 +46,11 @@ function calculateStatistics() {
 
     }
 }
+//function compare(a,b) { if (a.missed_votes_pct < b.missed_votes_pct) return -1; if (a.missed_votes_pct > b.missed_votes_pct) return 1; return 0; }
+//
+//data.results[0].members.sort(compare)
+//var sortedList = data.results[0].members.sort(compare)
+
 // (x / total)*100
 function putElements() {
 
