@@ -23,6 +23,8 @@ var indA = [];
 //Function Calls
 calculateStatistics();
 putElements();
+countVotesWithPartyAvg();
+console.log(statistics);
 
 
 //Function Declaration
@@ -43,7 +45,6 @@ function calculateStatistics() {
                 statistics.numberI++;
                 break;
         }
-
     }
 }
 //function compare(a,b) { if (a.missed_votes_pct < b.missed_votes_pct) return -1; if (a.missed_votes_pct > b.missed_votes_pct) return 1; return 0; }
@@ -58,4 +59,41 @@ function putElements() {
     document.getElementById('Dem').innerHTML = statistics.numberD;
     document.getElementById('Ind').innerHTML = statistics.numberI;
     document.getElementById('total').innerHTML = statistics.numberD+statistics.numberR+statistics.numberI;
+}
+
+function countVotesWithPartyAvg(){
+    
+    var arrayWithDem = [];
+    var arrayWithRep = [];
+    var arrayWithInd = [];
+    
+    for (var j = 0; j < members.length; j++) {
+
+        let everyMember = data.results[0].members[j];
+        
+        if(everyMember.party == "D"){
+            arrayWithDem.push(everyMember);
+        }
+        if(everyMember.party == "R"){
+            arrayWithRep.push(everyMember);
+        }
+        if(everyMember.party == "I"){
+            arrayWithInd.push(everyMember);
+        }
+        
+        statistics.democratsPartyPercentage = giveMeAvg(arrayWithDem).toFixed(2);        
+        statistics.republicanPartyPercentage = giveMeAvg(arrayWithRep).toFixed(2);
+        statistics.independentPartyPercentage = giveMeAvg(arrayWithInd).toFixed(2);
+    }
+}
+
+function giveMeAvg(recievedArray){
+    
+    var sum = 0;
+    for(var k=0; k < recievedArray.length; k++){
+        sum = sum + recievedArray[k].votes_with_party_pct;
+    }
+    
+    var avg = sum/recievedArray.length
+    return avg;
 }
