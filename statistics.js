@@ -58,42 +58,53 @@ function putElements() {
     document.getElementById('Rep').innerHTML = statistics.numberR;
     document.getElementById('Dem').innerHTML = statistics.numberD;
     document.getElementById('Ind').innerHTML = statistics.numberI;
-    document.getElementById('total').innerHTML = statistics.numberD+statistics.numberR+statistics.numberI;
+    document.getElementById('total').innerHTML = statistics.numberD + statistics.numberR + statistics.numberI;
 }
 
-function countVotesWithPartyAvg(){
-    
+
+
+function countVotesWithPartyAvg() {
     var arrayWithDem = [];
     var arrayWithRep = [];
     var arrayWithInd = [];
-    
+
     for (var j = 0; j < members.length; j++) {
 
         let everyMember = data.results[0].members[j];
-        
-        if(everyMember.party == "D"){
+
+        if (everyMember.party == "D") {
             arrayWithDem.push(everyMember);
         }
-        if(everyMember.party == "R"){
+        if (everyMember.party == "R") {
             arrayWithRep.push(everyMember);
         }
-        if(everyMember.party == "I"){
+        if (everyMember.party == "I") {
             arrayWithInd.push(everyMember);
         }
-        
-        statistics.democratsPartyPercentage = giveMeAvg(arrayWithDem).toFixed(2);        
+
+        statistics.democratsPartyPercentage = giveMeAvg(arrayWithDem).toFixed(2);
         statistics.republicanPartyPercentage = giveMeAvg(arrayWithRep).toFixed(2);
         statistics.independentPartyPercentage = giveMeAvg(arrayWithInd).toFixed(2);
+        
+
     }
 }
 
-function giveMeAvg(recievedArray){
-    
+function giveMeAvg(recievedArray) {
+
     var sum = 0;
-    for(var k=0; k < recievedArray.length; k++){
+    for (var k = 0; k < recievedArray.length; k++) {
         sum = sum + recievedArray[k].votes_with_party_pct;
     }
-    
-    var avg = sum/recievedArray.length
+
+    var avg = sum / recievedArray.length
     return avg;
+    
 }
+giveMeAvg(arrayWithDem);
+giveMeAvg(arrayWithRep);
+giveMeAvg(arrayWithInd);
+
+    document.getElementById('Rep1').innerHTML = giveMeAvg(arrayWithDem);
+    document.getElementById('Dem1').innerHTML = statistics.numberD;
+    document.getElementById('Ind1').innerHTML = statistics.numberI;
