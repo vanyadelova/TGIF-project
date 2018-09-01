@@ -1,4 +1,6 @@
 //Declare Global Vars
+
+
 let statistics = {
     "numberR": 0,
     "numberD": 0,
@@ -25,6 +27,7 @@ calculateStatistics();
 putElements();
 countVotesWithPartyAvg();
 console.log(statistics);
+
 
 
 //Function Declaration
@@ -99,12 +102,17 @@ function giveMeAvg(recievedArray) {
 
     var avg = sum / recievedArray.length
     return avg;
-    
-}
-giveMeAvg(arrayWithDem);
-giveMeAvg(arrayWithRep);
-giveMeAvg(arrayWithInd);
+    }
 
-    document.getElementById('Rep1').innerHTML = giveMeAvg(arrayWithDem);
-    document.getElementById('Dem1').innerHTML = statistics.numberD;
-    document.getElementById('Ind1').innerHTML = statistics.numberI;
+//giveMeAvg(arrayWithDem);
+//giveMeAvg(arrayWithRep);
+//giveMeAvg(arrayWithInd);
+//
+//    document.getElementById('Rep1').innerHTML = giveMeAvg(arrayWithDem);
+//    document.getElementById('Dem1').innerHTML = statistics.numberD;
+//    document.getElementById('Ind1').innerHTML = statistics.numberI;
+
+//PUT INFO IN TABLES
+
+
+
