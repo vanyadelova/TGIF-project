@@ -27,8 +27,11 @@ calculateStatistics();
 putElements();
 countVotesWithPartyAvg();
 console.log(statistics);
-
-
+glanceTable();
+leastEngaged();
+lessTen();
+mostEngaged();
+mostTen();
 
 //Function Declaration
 
@@ -88,7 +91,7 @@ function countVotesWithPartyAvg() {
         statistics.democratsPartyPercentage = giveMeAvg(arrayWithDem).toFixed(2);
         statistics.republicanPartyPercentage = giveMeAvg(arrayWithRep).toFixed(2);
         statistics.independentPartyPercentage = giveMeAvg(arrayWithInd).toFixed(2);
-        
+
 
     }
 }
@@ -102,7 +105,7 @@ function giveMeAvg(recievedArray) {
 
     var avg = sum / recievedArray.length
     return avg;
-    }
+}
 
 //giveMeAvg(arrayWithDem);
 //giveMeAvg(arrayWithRep);
@@ -112,8 +115,56 @@ function giveMeAvg(recievedArray) {
 //    document.getElementById('Dem1').innerHTML = statistics.numberD;
 //    document.getElementById('Ind1').innerHTML = statistics.numberI;
 
-//PUT INFO IN TABLES
+//"AT GLANCE" TABLE (ATENDANCE + LOYALTY)
 
+function glanceTable() {
+    for (var i = 0; i < members.length; i++) {
+        if (members[i].party == "R") {
+            statistics.numberR++;
+            statistics.republicanPartyPercentage += members[i].votes_with_party_pct;
+        }
+        if (members[i].party == "D") {
+            statistics.numberD++;
+            statistics.democratsPartyPercentage += members[i].votes_with_party_pct;
+        }
+        if (members[i].party == "I") {
+            statistics.numberI++;
+            statistics.independentPartyPercentage += members[i].votes_with_party_pct;
+        }
+        if (statistics.numberI != 0) {
+            statistics.independentPartyPercentage = statistics.independentPartyPercentage / statistics.numberI;
 
+        } else {
+            statistics.independentPartyPercentage = 0;
+        }
+    }
+    statistics.republicanPartyPercentage = statistics.republicanPartyPercentage / statistics.numberR;
+    statistics.democratsPartyPercentage = statistics.democratsPartyPercentage / statistics.numberD;
+}
 
+//LESS ENGAGED ATENDANCE" TABLE
+function leastEngaged() {
+    members.sort(function (a, b) {
+        return b.missed_votes - a.missed_votes
+    });
+}
 
+function lessTen() {
+
+    for (var i = 0; i < 10; i++) {
+        statistics.missedMostVote.push(members[i])
+    }
+}
+
+//"MOST ENGAGED ATENDANCE" TABLE
+function mostEngaged() {
+    members.sort(function (a, b) {
+        return a.missed_votes - b.missed_votes
+    });
+}
+
+function mostTen() {
+    for (var i = 0; i < 10; i++) {
+        statistics.missedLeastVote.push(members[i])
+    }
+}
