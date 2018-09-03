@@ -32,6 +32,7 @@ countVotesWithPartyAvg();
 engaged("least");
 engaged("most");
 
+
 //lessTen();
 //
 //mostTen();
@@ -86,7 +87,13 @@ function putElements() {
     buildSmallTable(statistics.leastEngaged, leastTable);
     
     var mostTable = document.getElementById("mostTable");
-    buildSmallTable(statistics.mostEngaged, mostTable)
+    buildSmallTable(statistics.mostEngaged, mostTable);
+    
+//    var leastLoyTable = document.getElementById('leastLoyTable');
+//    buildSmallTable(??, leastLoyTable);
+//    
+//    var mostLoyTable = document.getElementById("mostLoyTable");
+//    buildSmallTable(??, mostLoyTable);
 }
 
 
