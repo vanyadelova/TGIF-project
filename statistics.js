@@ -12,7 +12,9 @@ let statistics = {
     "doNotVote": [],
     "doVote": [],
     "missedMostVote": [],
-    "missedLeastVote": []
+    "missedLeastVote": [],
+    "leastEngaged": [],
+    "mostEngaged": [],
 }
 
 let members = data.results[0].members;
@@ -27,10 +29,12 @@ var indA = [];
 calculateStatistics();
 countVotesWithPartyAvg();
 //glanceTable();
-leastEngaged();
-lessTen();
-mostEngaged();
-mostTen();
+engaged("least");
+engaged("most");
+
+//lessTen();
+//
+//mostTen();
 console.log(statistics);
 putElements();
 
@@ -78,10 +82,11 @@ function putElements() {
     total.insertCell().innerHTML = statistics.numberD + statistics.numberR + statistics.numberI;
     total.insertCell().innerHTML = statistics.totalPartyPercentage;
     
+    var leastTable = document.getElementById('leastTable');
+    buildSmallTable(statistics.leastEngaged, leastTable);
     
-    
-    
-    
+    var mostTable = document.getElementById("mostTable");
+    buildSmallTable(statistics.mostEngaged, mostTable)
 }
 
 
@@ -158,33 +163,63 @@ function giveMeAvg(recievedArray) {
 //}
 
 //LESS ENGAGED ATENDANCE" TABLE
-function leastEngaged() {
-    var sortedArray = members.sort(function (a, b) {
-        return b.missed_votes - a.missed_votes
-    });
+function engaged(direction) {
+    
+    if(direction == "least"){ 
+        var sortedArray = members.sort(function (a, b) {
+            return b.missed_votes - a.missed_votes
+        });
+    } else {
+        var sortedArray = members.sort(function (a, b) {
+            return a.missed_votes - b.missed_votes
+        });
+    }
     
     // take only 10% from sortedArray
+    var checkedPrecent = sortedArray.length / 10;
+    checkedPrecent = checkedPrecent.toFixed(0);
     // save in statistics this 10%
     
+    var tenPrcArray = [];
+    for (i = 0; i<checkedPrecent; i++){
+        tenPrcArray.push(members[i]) ;
+    }
     
-}
-
-function lessTen() {
-
-    for (var i = 0; i < 10; i++) {
-        statistics.missedMostVote.push(members[i])
+    if(direction == "least"){
+        statistics.leastEngaged = tenPrcArray;
+    } else {
+        statistics.mostEngaged = tenPrcArray;
     }
 }
 
-//"MOST ENGAGED ATENDANCE" TABLE
-function mostEngaged() {
-    members.sort(function (a, b) {
-        return a.missed_votes - b.missed_votes
-    });
-}
-
-function mostTen() {
-    for (var i = 0; i < 10; i++) {
-        statistics.missedLeastVote.push(members[i])
+function buildSmallTable(smallArray, whereToPut){
+    
+        for(var k=0; k < smallArray.length; k++){
+            var link = "<a href='" + smallArray[k].url + "'>" + smallArray[k].first_name + " " + smallArray[k].last_name + "</a>";
+            var newRow = document.createElement("tr");
+            newRow.insertCell().innerHTML = link;
+            newRow.insertCell().innerHTML = smallArray[k].missed_votes;
+            newRow.insertCell().innerHTML = smallArray[k].missed_votes_pct;
+            whereToPut.append(newRow);
     }
 }
+
+//function lessTen() {
+//
+//    for (var i = 0; i < 10; i++) {
+//        statistics.missedMostVote.push(members[i])
+//    }
+//}
+//
+////"MOST ENGAGED ATENDANCE" TABLE
+//function mostEngaged() {
+//    members.sort(function (a, b) {
+//        return a.missed_votes - b.missed_votes
+//    });
+//}
+//
+//function mostTen() {
+//    for (var i = 0; i < 10; i++) {
+//        statistics.missedLeastVote.push(members[i])
+//    }
+//}

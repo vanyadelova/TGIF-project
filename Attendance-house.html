@@ -88,29 +88,21 @@
                                 <th>No of Reps</th>
                                 <th>% Voted with Party</th>
                             </tr>
-                            <tr>
-                                <td>Republicans</td>
-                                <td id="Rep"></td>
-                                <td id="Rep1"></td>
-                            </tr>
-                            <tr>
-                                <td>Democrats</td>
-                                <td id="Dem"></td>
-                                <td id="Dem1"></td>
-                            </tr>
-                            <tr>
-                                <td>Independents</td>
-                                <td id="Ind"></td>
-                                <td id="Ind1"></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Total</td>
-                                <td id="total"></td>
-                                <td id="total1"></td>
-                                <td></td>
-                            </tr>
                         </thead>
+                        <tbody>
+                            <tr id="Rep">
+                                <td>Republicans</td>
+                            </tr>
+                            <tr id="Dem">
+                                <td>Democrats</td>
+                            </tr>
+                            <tr id="Ind">
+                                <td>Independents</td>
+                            </tr>
+                            <tr id="total">
+                                <td>Total</td>
+                            </tr>
+                        </tbody>
 
                     </table>
 
@@ -128,7 +120,7 @@
                         (Bottom 10% Attendance)
                     </h4>
 
-                    <table class="table table-bordered" table id="leastTable">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -136,6 +128,9 @@
                                 <th>% Missed</th>
                             </tr>
                         </thead>
+                        <tbody id="leastTable">
+                            
+                        </tbody>
                     </table>
 
                 </div>
@@ -146,7 +141,7 @@
                         (Top 10% Attendance)
                     </h4>
 
-                    <table class="table table-bordered"id="mostTable">
+                    <table class="table table-bordered">
                      <thead>
                             <tr>
                                 <th>Name</th>
@@ -154,6 +149,7 @@
                                 <th>% Missed</th>
                             </tr>
                         </thead>
+                        <tbody id="mostTable"></tbody>
                     
                     </table>
 
@@ -173,7 +169,9 @@
 
 
         <script src="pro-congress-113-house.js"></script>
-        <script src="senate.js"></script>
+<!--        <script src="senate.js"></script>-->
+        <script src="statistics.js"></script>
+
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
