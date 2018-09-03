@@ -230,3 +230,31 @@ function buildSmallTable(smallArray, whereToPut){
 //        statistics.missedLeastVote.push(members[i])
 //    }
 //}
+
+//"LEAST LOYAL PARTY" TABLE
+
+function leastLoyal() {
+    members.sort(function (a, b) {
+        return a.votes_with_party_pct - b.votes_with_party_pct
+    });
+}
+
+function lessTenLoyal() {
+    for (var i = 0; i < 10; i++) {
+        statistics.doNotVote.push(members[i])
+    }
+}
+
+//"MOST LOYAL PARTY" TABLE
+
+function mostLoyal() {
+    members.sort(function (a, b) {
+        return b.votes_with_party_pct - a.votes_with_party_pct
+    });
+}
+
+function mostTenLoyal() {
+    for (var i = 0; i < 10; i++) {
+        statistics.doVote.push(members[i])
+    }
+}
