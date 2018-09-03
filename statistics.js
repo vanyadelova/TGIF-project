@@ -8,6 +8,7 @@ let statistics = {
     "republicanPartyPercentage": 0,
     "democratsPartyPercentage": 0,
     "independentPartyPercentage": 0,
+    "totalPartyPercentage": 0,
     "doNotVote": [],
     "doVote": [],
     "missedMostVote": [],
@@ -24,14 +25,14 @@ var indA = [];
 
 //Function Calls
 calculateStatistics();
-putElements();
 countVotesWithPartyAvg();
-console.log(statistics);
-glanceTable();
+//glanceTable();
 leastEngaged();
 lessTen();
 mostEngaged();
 mostTen();
+console.log(statistics);
+putElements();
 
 //Function Declaration
 
@@ -61,10 +62,26 @@ function calculateStatistics() {
 // (x / total)*100
 function putElements() {
 
-    document.getElementById('Rep').innerHTML = statistics.numberR;
-    document.getElementById('Dem').innerHTML = statistics.numberD;
-    document.getElementById('Ind').innerHTML = statistics.numberI;
-    document.getElementById('total').innerHTML = statistics.numberD + statistics.numberR + statistics.numberI;
+    var repRow = document.getElementById('Rep');
+    repRow.insertCell().innerHTML = statistics.numberR;
+    repRow.insertCell().innerHTML = statistics.republicanPartyPercentage;
+    
+    var demRow = document.getElementById('Dem');
+    demRow.insertCell().innerHTML = statistics.numberD;
+    demRow.insertCell().innerHTML = statistics.democratsPartyPercentage;
+    
+    var indRow = document.getElementById('Ind');
+    indRow.insertCell().innerHTML = statistics.numberI;
+    indRow.insertCell().innerHTML = statistics.independentPartyPercentage;
+    
+    var total = document.getElementById('total');
+    total.insertCell().innerHTML = statistics.numberD + statistics.numberR + statistics.numberI;
+    total.insertCell().innerHTML = statistics.totalPartyPercentage;
+    
+    
+    
+    
+    
 }
 
 
@@ -90,9 +107,7 @@ function countVotesWithPartyAvg() {
 
         statistics.democratsPartyPercentage = giveMeAvg(arrayWithDem).toFixed(2);
         statistics.republicanPartyPercentage = giveMeAvg(arrayWithRep).toFixed(2);
-        statistics.independentPartyPercentage = giveMeAvg(arrayWithInd).toFixed(2);
-
-
+        statistics.independentPartyPercentage = giveMeAvg(arrayWithInd).toFixed(2);       statistics.totalPartyPercentage = giveMeAvg(members).toFixed(2);
     }
 }
 
@@ -117,36 +132,41 @@ function giveMeAvg(recievedArray) {
 
 //"AT GLANCE" TABLE (ATENDANCE + LOYALTY)
 
-function glanceTable() {
-    for (var i = 0; i < members.length; i++) {
-        if (members[i].party == "R") {
-            statistics.numberR++;
-            statistics.republicanPartyPercentage += members[i].votes_with_party_pct;
-        }
-        if (members[i].party == "D") {
-            statistics.numberD++;
-            statistics.democratsPartyPercentage += members[i].votes_with_party_pct;
-        }
-        if (members[i].party == "I") {
-            statistics.numberI++;
-            statistics.independentPartyPercentage += members[i].votes_with_party_pct;
-        }
-        if (statistics.numberI != 0) {
-            statistics.independentPartyPercentage = statistics.independentPartyPercentage / statistics.numberI;
-
-        } else {
-            statistics.independentPartyPercentage = 0;
-        }
-    }
-    statistics.republicanPartyPercentage = statistics.republicanPartyPercentage / statistics.numberR;
-    statistics.democratsPartyPercentage = statistics.democratsPartyPercentage / statistics.numberD;
-}
+//function glanceTable() {
+//    for (var i = 0; i < members.length; i++) {
+//        if (members[i].party == "R") {
+//            statistics.numberR++;
+//            statistics.republicanPartyPercentage += members[i].votes_with_party_pct;
+//        }
+//        if (members[i].party == "D") {
+//            statistics.numberD++;
+//            statistics.democratsPartyPercentage += members[i].votes_with_party_pct;
+//        }
+//        if (members[i].party == "I") {
+//            statistics.numberI++;
+//            statistics.independentPartyPercentage += members[i].votes_with_party_pct;
+//        }
+//        if (statistics.numberI != 0) {
+//            statistics.independentPartyPercentage = statistics.independentPartyPercentage / statistics.numberI;
+//
+//        } else {
+//            statistics.independentPartyPercentage = 0;
+//        }
+//    }
+//    statistics.republicanPartyPercentage = statistics.republicanPartyPercentage / statistics.numberR;
+//    statistics.democratsPartyPercentage = statistics.democratsPartyPercentage / statistics.numberD;
+//}
 
 //LESS ENGAGED ATENDANCE" TABLE
 function leastEngaged() {
-    members.sort(function (a, b) {
+    var sortedArray = members.sort(function (a, b) {
         return b.missed_votes - a.missed_votes
     });
+    
+    // take only 10% from sortedArray
+    // save in statistics this 10%
+    
+    
 }
 
 function lessTen() {
