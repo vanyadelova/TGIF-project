@@ -31,6 +31,8 @@ countVotesWithPartyAvg();
 //glanceTable();
 engaged("least");
 engaged("most");
+lessTenPctLoy();
+mostTenPctLoy();
 
 
 //lessTen();
@@ -38,6 +40,10 @@ engaged("most");
 //mostTen();
 console.log(statistics);
 putElements();
+buildSmallTable(statistics.doVote, document.getElementById("mostLoyTable"));
+buildSmallTable(statistics.doNotVote, document.getElementById("leastLoyTable"));
+
+
 
 //Function Declaration
 
@@ -201,13 +207,17 @@ function engaged(direction) {
 
 function buildSmallTable(smallArray, whereToPut){
     
-        for(var k=0; k < smallArray.length; k++){
+    if(whereToPut){
+                for(var k=0; k < smallArray.length; k++){
             var link = "<a href='" + smallArray[k].url + "'>" + smallArray[k].first_name + " " + smallArray[k].last_name + "</a>";
             var newRow = document.createElement("tr");
             newRow.insertCell().innerHTML = link;
             newRow.insertCell().innerHTML = smallArray[k].missed_votes;
             newRow.insertCell().innerHTML = smallArray[k].missed_votes_pct;
             whereToPut.append(newRow);
+    }
+    
+
     }
 }
 
@@ -239,22 +249,45 @@ function leastLoyal() {
     });
 }
 
-function lessTenLoyal() {
-    for (var i = 0; i < 10; i++) {
-        statistics.doNotVote.push(members[i])
+function lessTenPctLoy() {
+    
+    var mySortedArray = members.sort(function (a,b) {
+        return a.votes_with_party_pct - b.votes_with_party_pct;
+    });
+    
+    var pctNumber = (mySortedArray.length * 0.10).toFixed(0);
+                //(353*0.1).toFixed(0)
+    
+    for (var i = 0; i < pctNumber ; i++) {
+        statistics.doNotVote.push(mySortedArray[i])
     }
+    
+    console.log(statistics.doNotVote);
+}
+
+function mostTenPctLoy() {
+    
+    var myNewSortedArray = members.sort(function (a,b) {
+        return b.votes_with_party_pct - a.votes_with_party_pct;
+    });
+    
+    var pctNewNumber = (myNewSortedArray.length * 0.10).toFixed(0);
+    
+    for (var i = 0; i < pctNewNumber; i++){
+        statistics.doVote.push(members[i])
+}
 }
 
 //"MOST LOYAL PARTY" TABLE
 
-function mostLoyal() {
-    members.sort(function (a, b) {
-        return b.votes_with_party_pct - a.votes_with_party_pct
-    });
-}
-
-function mostTenLoyal() {
-    for (var i = 0; i < 10; i++) {
-        statistics.doVote.push(members[i])
-    }
-}
+//function mostLoyal() {
+//    members.sort(function (a, b) {
+//        return b.votes_with_party_pct - a.votes_with_party_pct
+//    });
+//}
+//
+//function mostTenLoyal() {
+//    for (var i = 0; i < 10; i++) {
+//        statistics.doVote.push(members[i])
+//    }
+//}
