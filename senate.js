@@ -1,3 +1,32 @@
+
+var data;
+
+onload = (function () {
+    
+
+       fetch('https://api.propublica.org/congress/v1/113/senate/members.json', {
+           
+
+              headers: new Headers({
+
+              'X-API-Key': '9PmepI5CAJ7nAqloQuDUvRYyNq1KDer4l2v7gWJ7'
+
+              })
+
+          })
+
+       .then(response => response.json())
+
+       .then((jsonData) => {
+
+           data = jsonData;
+main();
+       });
+
+})
+
+function main(){
+    
 function createTable() {
     document.getElementById("putDataHere").innerHTML='';
     for (var j = 0; j < data.results[0].members.length; j++) {
@@ -216,3 +245,4 @@ function myFunction() {
 //    document.getElementById('D').onclick = function () {
 //        hideRepublicans();
 //    }
+}

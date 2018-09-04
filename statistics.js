@@ -1,5 +1,31 @@
 //Declare Global Vars
 
+var data;
+
+onload = (function () {
+
+       fetch('https://api.propublica.org/congress/v1/113/senate/members.json', {
+
+              headers: new Headers({
+
+              'X-API-Key': '9PmepI5CAJ7nAqloQuDUvRYyNq1KDer4l2v7gWJ7'
+
+              })
+
+          })
+
+       .then(response => response.json())
+
+       .then((jsonData) => {
+
+           data = jsonData;
+setUp();
+       });
+
+})
+
+
+function setUp (){
 
 let statistics = {
     "numberR": 0,
@@ -291,3 +317,5 @@ function mostTenPctLoy() {
 //        statistics.doVote.push(members[i])
 //    }
 //}
+
+}
