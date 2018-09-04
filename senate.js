@@ -3,8 +3,13 @@ var data;
 
 onload = (function () {
     
-
-       fetch('https://api.propublica.org/congress/v1/113/senate/members.json', {
+         if (document.title === "Senate Data") {
+              url = "https://api.propublica.org/congress/v1/113/senate/members.json" 
+           } else {
+            url = "https://api.propublica.org/congress/v1/113/house/members.json"
+       }
+    
+       fetch(url, {
            
 
               headers: new Headers({
@@ -18,6 +23,8 @@ onload = (function () {
        .then(response => response.json())
 
        .then((jsonData) => {
+           
+           console.log(jsonData.results[0].members[0].first_name)
 
            data = jsonData;
 main();

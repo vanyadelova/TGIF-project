@@ -3,8 +3,14 @@
 var data;
 
 onload = (function () {
+    
+        if (document.title === "Senate Data") {
+              url = "https://api.propublica.org/congress/v1/113/senate/members.json" 
+           } else {
+            url = "https://api.propublica.org/congress/v1/113/house/members.json"
+       }
 
-       fetch('https://api.propublica.org/congress/v1/113/senate/members.json', {
+       fetch(url, {
 
               headers: new Headers({
 
