@@ -1,0 +1,15 @@
+#tgif-logo {
+    display: inline-block;
+}
+
+#tgif-anchor {
+    color: #27628e;
+}
+
+#tgif-anchor:hover {
+    color: #df5857
+}
+
+nav {
+    font-size: 1.2rem;
+}
