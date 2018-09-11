@@ -5,20 +5,21 @@ var data;
 onload = (function () {
     
         if (document.title === "Senate Data") {
-              url = "https://api.propublica.org/congress/v1/113/senate/members.json" 
+              url = "https://api.myjson.com/bins/1eja30" 
            } else {
-            url = "https://api.propublica.org/congress/v1/113/house/members.json"
+            url = "https://api.myjson.com/bins/j83do"
        }
 
-       fetch(url, {
-
-              headers: new Headers({
-
-              'X-API-Key': '9PmepI5CAJ7nAqloQuDUvRYyNq1KDer4l2v7gWJ7'
-
-              })
-
-          })
+    fetch(url)
+//       fetch(url, {
+//
+//              headers: new Headers({
+//
+//              'X-API-Key': '9PmepI5CAJ7nAqloQuDUvRYyNq1KDer4l2v7gWJ7'
+//
+//              })
+//
+//          })
 
        .then(response => response.json())
 
