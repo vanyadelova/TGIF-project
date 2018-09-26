@@ -23,7 +23,7 @@ onload = (function () {
               url = "https://api.myjson.com/bins/1eja30" 
            } else {
             url = "https://api.myjson.com/bins/j83do"
-       }
+       }    \                                                                                                                                                    
     
     fetch (url)
     
